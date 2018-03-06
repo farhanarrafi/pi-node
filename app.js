@@ -5,7 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var firebase = require("firebase");
-var gpio = require('onoff').Gpio;
 
 
 var index = require('./routes/index');
@@ -56,12 +55,9 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var raspberry = require("./services/raspberry");
+raspberry.watchButton(19,17);
 
-var led  = new gpio(17,'out');
-var button = new gpio(19,'in','both');
-
-button.watch(function (err,value) {
-    led.writeSync(value);
-});
+console.log("Server Started")
 
 module.exports = app;
