@@ -4,7 +4,6 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var firebase = require("firebase");
 
 
 var index = require('./routes/index');
@@ -45,15 +44,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-var config = {
-    apiKey: "AIzaSyCkBTch7JluECyhYUcw_lQzPwBzgRz1XdM",
-    authDomain: "raspberry-sf.firebaseapp.com",
-    databaseURL: "https://raspberry-sf.firebaseio.com",
-    projectId: "raspberry-sf",
-    storageBucket: "raspberry-sf.appspot.com",
-    messagingSenderId: "201035736094"
-};
-firebase.initializeApp(config);
+
 
 var raspberry = require("./services/raspberry");
 raspberry.watchButton(19,17);
